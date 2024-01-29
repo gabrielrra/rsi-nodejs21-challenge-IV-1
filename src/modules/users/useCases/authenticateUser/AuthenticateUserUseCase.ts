@@ -1,12 +1,12 @@
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from 'tsyringe';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import authConfig from '../../../../config/auth';
 
-import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { IAuthenticateUserResponseDTO } from "./IAuthenticateUserResponseDTO";
-import { IncorrectEmailOrPasswordError } from "./IncorrectEmailOrPasswordError";
+import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IAuthenticateUserResponseDTO } from './IAuthenticateUserResponseDTO';
+import { IncorrectEmailOrPasswordError } from './IncorrectEmailOrPasswordError';
 
 interface IRequest {
   email: string;
@@ -20,10 +20,13 @@ export class AuthenticateUserUseCase {
     private usersRepository: IUsersRepository,
   ) {}
 
-  async execute({ email, password }: IRequest): Promise<IAuthenticateUserResponseDTO> {
+  async execute({
+    email,
+    password,
+  }: IRequest): Promise<IAuthenticateUserResponseDTO> {
     const user = await this.usersRepository.findByEmail(email);
 
-    if(!user) {
+    if (!user) {
       throw new IncorrectEmailOrPasswordError();
     }
 
@@ -44,9 +47,9 @@ export class AuthenticateUserUseCase {
       user: {
         id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
       },
-      token
-    }
+      token,
+    };
   }
 }
