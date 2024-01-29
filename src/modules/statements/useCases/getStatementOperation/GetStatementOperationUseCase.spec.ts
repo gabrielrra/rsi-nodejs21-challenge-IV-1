@@ -46,7 +46,7 @@ describe('GetStatementOperationUseCase', () => {
     expect(getStatementRes.id).toBe(statement.id);
   });
 
-  it('Should not be able to get statement for non existing user', async () => {
+  it('Should NOT be able to get statement for non existing user', async () => {
     expect(async () => {
       const statement = await inMemoryStatementsRepository.create({
         user_id: testUser.id,
@@ -61,7 +61,7 @@ describe('GetStatementOperationUseCase', () => {
     }).rejects.toBeInstanceOf(GetStatementOperationError.UserNotFound);
   });
 
-  it('Should not be able to get non existing statement for existing user', async () => {
+  it('Should NOT be able to get non existing statement for existing user', async () => {
     expect(async () => {
       await inMemoryStatementsRepository.create({
         user_id: testUser.id,

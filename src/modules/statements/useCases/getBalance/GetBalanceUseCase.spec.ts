@@ -37,7 +37,7 @@ describe('GetBalanceUseCase', () => {
     expect(balance).toHaveProperty('balance');
   });
 
-  it('Should not be able to get balance for non existing user', async () => {
+  it('Should NOT be able to get balance for non existing user', async () => {
     expect(async () => {
       await getBalanceUseCase.execute({
         user_id: randomUUID(),

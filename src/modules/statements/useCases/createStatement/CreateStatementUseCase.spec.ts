@@ -41,7 +41,7 @@ describe('CreateStatementUseCase', () => {
     expect(statement).toHaveProperty('id');
   });
 
-  it('Should not be able to create a statement for user that does not exist', async () => {
+  it('Should NOT be able to create a statement for user that does not exist', async () => {
     expect(async () => {
       await createStatementUseCase.execute({
         user_id: randomUUID(),
@@ -52,7 +52,7 @@ describe('CreateStatementUseCase', () => {
     }).rejects.toBeInstanceOf(CreateStatementError.UserNotFound);
   });
 
-  it('Should not be able to create a withdraw statement when insufficient funds', async () => {
+  it('Should NOT be able to create a withdraw statement when insufficient funds', async () => {
     expect(async () => {
       await createStatementUseCase.execute({
         user_id: testUser.id,
